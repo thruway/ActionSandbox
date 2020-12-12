@@ -1,0 +1,24 @@
+name: tests
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.2', '7.3', '7.4', '8.0']
+    name: PHP ${{ matrix.php }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php }}
+      - name: Show PHP version
+        run: php -v
+      - name: Install Deps
+        run: composer install —no-progress —no-suggest
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit
