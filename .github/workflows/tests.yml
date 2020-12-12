@@ -19,6 +19,6 @@ jobs:
       - name: Show PHP version
         run: php -v
       - name: Install Deps
-        run: composer install —no-progress —no-suggest
+        run: composer install --no-progress --no-suggest
       - name: Run PHPUnit
         run: vendor/bin/phpunit
